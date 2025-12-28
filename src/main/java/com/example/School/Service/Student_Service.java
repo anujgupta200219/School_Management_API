@@ -6,6 +6,7 @@ import com.example.School.Entity.StandardId;
 import com.example.School.Entity.Student;
 import com.example.School.Repository.Standard_Repository;
 import com.example.School.Repository.Student_Repository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class Student_Service {
     @Autowired
     private Standard_Repository standardRepository;
 
+    @Transactional
     public void saveStudent(Student student){
         StandardId standardId=student.getStandard().getId();
         Optional<Standard> standards=standardRepository.findById(standardId);
