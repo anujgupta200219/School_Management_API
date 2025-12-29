@@ -10,7 +10,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,5 +45,19 @@ public class Student_Service {
                 s.getStandard().getId().getClassName(),
                 s.getStandard().getId().getSection()
         )).toList();
+    }
+
+    public Student_Response getStudentByInfo(int roll, int className, String section){
+        Optional<Student> studentinfo = studentRepository.findByRollAndStandard_Id_ClassNameAndStandard_Id_Section(roll, className, section);
+        if (studentinfo.isPresent()){
+            Student student=studentinfo.get();
+            return new Student_Response(
+                    student.getRoll(),
+                    student.getName(),
+                    student.getStandard().getId().getClassName(),
+                    student.getStandard().getId().getSection()
+                    );
+        }
+        else return null;
     }
 }

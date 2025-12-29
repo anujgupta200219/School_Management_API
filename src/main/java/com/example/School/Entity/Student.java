@@ -14,9 +14,8 @@ public class Student {
     @GeneratedValue
     int id;
 
-    int Roll;
-
-    String Name;
+    int roll;
+    String name;
 
     @ManyToOne
     @JoinColumns({
